@@ -16,8 +16,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/home" component={Home} />
-        {/* <Route exact path="/detail" component={Detail} />
-        <Route exact path="/favorites" component={Favorites} /> */}
+        {/* <Route exact path="/detail" component={Detail} /> */}
+        <Route exact path="/favorites" component={Favorites} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
