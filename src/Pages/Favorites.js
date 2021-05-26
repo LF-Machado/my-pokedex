@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import NavBar from "../Components/NavBar";
+import Logout from "../Components/Logout";
 
 function Favorites() {
-  const logedIn = localStorage.getItem("logedIn");
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!logedIn) history.push("/");
-  }, []);
-
   return (
     <div>
       <div>Favorites</div>
+      <Logout />
       <NavBar />
     </div>
   );
