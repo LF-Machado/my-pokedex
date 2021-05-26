@@ -25,6 +25,7 @@ function LoginForm() {
 
     if (validation()) {
       localStorage.setItem("logedIn", true);
+      localStorage.setItem("user", email);
       history.push("/home");
     }
   };

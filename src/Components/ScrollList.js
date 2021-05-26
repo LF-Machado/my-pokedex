@@ -13,6 +13,9 @@ function ScrollList() {
   const [pagesArray, setPagesArr] = useState([1, 2, 3, 4, 5]);
   const [maxPage, setMaxPage] = useState(10);
   const [lastArray, setLastArray] = useState([]);
+  const [favoritesArray, setFavoritesArray] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
   const logedIn = localStorage.getItem("logedIn");
   let location = useLocation();
   let history = useHistory();
@@ -64,6 +67,10 @@ function ScrollList() {
     }
   }, [logedIn, offset, limit]);
 
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favoritesArray));
+  }, [favoritesArray]);
+
   const handlePageClick = ({ target }) => {
     const clickedPage = parseInt(target.innerText);
     console.log(clickedPage);
@@ -98,6 +105,9 @@ function ScrollList() {
 
     allPokemon[i].favorite = false;
     setAllPokemon([...allPokemon]);
+
+    favoritesArray.splice(favoritesArray.indexOf(id), 1);
+    setFavoritesArray([...favoritesArray]);
   };
 
   const handleClickFavorite = ({ target }) => {
@@ -107,6 +117,8 @@ function ScrollList() {
 
     allPokemon[i].favorite = true;
     setAllPokemon([...allPokemon]);
+
+    setFavoritesArray([...favoritesArray, id]);
   };
 
   return (

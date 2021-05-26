@@ -10,7 +10,8 @@ function Logout() {
   }, [history, logedIn]);
 
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem("logedIn");
+    localStorage.removeItem("user");
     history.push("/");
   };
 
