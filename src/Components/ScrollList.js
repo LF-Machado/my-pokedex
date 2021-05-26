@@ -5,6 +5,8 @@ import getImage from "../utils/getImage";
 import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
 import { useLocation, useHistory } from "react-router-dom";
+import saveFavorites from "../utils/saveFavorites";
+import getFavorites from "../utils/getFavorites";
 
 function ScrollList() {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -13,19 +15,22 @@ function ScrollList() {
   const [pagesArray, setPagesArr] = useState([1, 2, 3, 4, 5]);
   const [maxPage, setMaxPage] = useState(10);
   const [lastArray, setLastArray] = useState([]);
+  const currUser = localStorage.getItem("user");
   const [favoritesArray, setFavoritesArray] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || []
+    getFavorites(currUser) || []
   );
   const logedIn = localStorage.getItem("logedIn");
   let location = useLocation();
   let history = useHistory();
+
+  console.log(favoritesArray);
 
   useEffect(() => {
     const page =
       parseInt(new URLSearchParams(location.search).get("page")) || 1;
     setOffset((page - 1) * limit);
 
-    ///sfsfsdfsdfsdf
+    // Check which favorites are stored and set pokemon with favorites to true
   }, [limit, location.search]);
 
   useEffect(() => {
@@ -68,12 +73,11 @@ function ScrollList() {
   }, [logedIn, offset, limit]);
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favoritesArray));
-  }, [favoritesArray]);
+    saveFavorites(currUser, favoritesArray);
+  }, [currUser, favoritesArray]);
 
   const handlePageClick = ({ target }) => {
     const clickedPage = parseInt(target.innerText);
-    console.log(clickedPage);
     history.push(`?page=${clickedPage}`);
 
     if (clickedPage === 1) setPagesArr([1, 2, 3, 4, 5]);
