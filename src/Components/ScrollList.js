@@ -2,14 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ScrollList.css";
 import getImage from "../utils/getImage";
-import { useLocation } from "react-router-dom";
+import Pagination from "./Pagination";
+import Pokemon from "./Pokemon";
+import { useLocation, useHistory } from "react-router-dom";
 
-function ScrollList(props) {
-  const [pokemon, setPokemon] = useState([]);
+function ScrollList() {
+  const [allPokemon, setAllPokemon] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(20);
+  const [limit] = useState(20);
+  const [pagesArray, setPagesArr] = useState([1, 2, 3, 4, 5]);
+  const [maxPage, setMaxPage] = useState(10);
+  const [lastArray, setLastArray] = useState([]);
   const logedIn = localStorage.getItem("logedIn");
-  // let location = useLocation();
+  let location = useLocation();
+  let history = useHistory();
+
+  useEffect(() => {
+    const page =
+      parseInt(new URLSearchParams(location.search).get("page")) || 1;
+    setOffset((page - 1) * limit);
+  }, [limit, location.search]);
 
   useEffect(() => {
     if (logedIn) {
@@ -20,11 +32,9 @@ function ScrollList(props) {
           );
 
           const generalPokemon = response.data.results;
-
           const allUrl = generalPokemon.map(pokemon => {
             return pokemon.url;
           });
-
           const detailPokemon = await Promise.all(
             allUrl.map(url => {
               const image = getImage(url);
@@ -32,42 +42,69 @@ function ScrollList(props) {
             })
           );
 
-          setPokemon(detailPokemon);
+          setAllPokemon(detailPokemon);
+          setMaxPage(Math.ceil(response.data.count / limit));
           console.log(detailPokemon);
-          console.log(generalPokemon);
-
-          // const image = await getImage(response.data.results[0].url);
-          // console.log(image);
-
-          // const page = parseInt(
-          //   new URLSearchParams(location.search).get("page")
-          // );
-
-          // console.log(location);
-          // console.log(page);
         } catch (error) {
           alert(error);
         }
       };
       fetchData();
+
+      //Initialize last pages array
+      const arr = [];
+      let arrayElement = maxPage - pagesArray.length;
+      for (let i = 0; i < pagesArray.length; i++) {
+        arrayElement += 1;
+        arr.push(arrayElement);
+      }
+      setLastArray(arr);
     }
   }, [logedIn, offset, limit]);
 
-  // function sprite(url) {
-  //   console.log(url);
-  //   return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png";
-  // }
+  const handlePageClick = ({ target }) => {
+    const clickedPage = parseInt(target.innerText);
+    console.log(clickedPage);
+    history.push(`?page=${clickedPage}`);
+
+    if (clickedPage === 1) setPagesArr([1, 2, 3, 4, 5]);
+    else if (!lastArray.includes(clickedPage))
+      setPagesArr([
+        clickedPage - 1,
+        clickedPage,
+        clickedPage + 1,
+        clickedPage + 2,
+        clickedPage + 3,
+      ]);
+    else setPagesArr(lastArray);
+  };
+
+  const goToFirst = () => {
+    setPagesArr([1, 2, 3, 4, 5]);
+    history.push(`?page=${1}`);
+  };
+  const goToLast = () => {
+    setPagesArr(lastArray);
+    history.push(`?page=${maxPage}`);
+  };
 
   return (
     <div className="scroll__container">
-      {pokemon.map(pokemon => {
-        return (
-          <div key={pokemon.id}>
-            <label>{pokemon.name}</label>
-            <img src={pokemon.sprites.front_default} />
-          </div>
-        );
-      })}
+      <Pagination
+        pagesArray={pagesArray}
+        handlePageClick={handlePageClick}
+        goToFirst={goToFirst}
+        goToLast={goToLast}
+        maxPage={maxPage}
+      />
+      <Pokemon allPokemon={allPokemon} />
+      <Pagination
+        pagesArray={pagesArray}
+        handlePageClick={handlePageClick}
+        goToFirst={goToFirst}
+        goToLast={goToLast}
+        maxPage={maxPage}
+      />
     </div>
   );
 }
