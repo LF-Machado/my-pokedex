@@ -21,6 +21,8 @@ function ScrollList() {
     const page =
       parseInt(new URLSearchParams(location.search).get("page")) || 1;
     setOffset((page - 1) * limit);
+
+    ///sfsfsdfsdfsdf
   }, [limit, location.search]);
 
   useEffect(() => {
@@ -83,9 +85,28 @@ function ScrollList() {
     setPagesArr([1, 2, 3, 4, 5]);
     history.push(`?page=${1}`);
   };
+
   const goToLast = () => {
     setPagesArr(lastArray);
     history.push(`?page=${maxPage}`);
+  };
+
+  const handleClickUnfavorite = ({ target }) => {
+    const id = parseInt(target.id);
+    let i = 0;
+    for (i; i < allPokemon.length; i++) if (allPokemon[i].id === id) break;
+
+    allPokemon[i].favorite = false;
+    setAllPokemon([...allPokemon]);
+  };
+
+  const handleClickFavorite = ({ target }) => {
+    const id = parseInt(target.id);
+    let i = 0;
+    for (i; i < allPokemon.length; i++) if (allPokemon[i].id === id) break;
+
+    allPokemon[i].favorite = true;
+    setAllPokemon([...allPokemon]);
   };
 
   return (
@@ -97,7 +118,11 @@ function ScrollList() {
         goToLast={goToLast}
         maxPage={maxPage}
       />
-      <Pokemon allPokemon={allPokemon} />
+      <Pokemon
+        allPokemon={allPokemon}
+        handleClickUnfavorite={handleClickUnfavorite}
+        handleClickFavorite={handleClickFavorite}
+      />
       <Pagination
         pagesArray={pagesArray}
         handlePageClick={handlePageClick}
