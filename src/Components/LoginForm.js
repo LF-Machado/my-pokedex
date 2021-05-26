@@ -4,6 +4,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -12,8 +13,35 @@ function LoginForm() {
     if (id === "password") setPassword(value);
   };
 
-  const handleSubmit = () => {
-    alert("Submission succesful!");
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (validation()) {
+      sessionStorage.setItem("logedIn", true);
+      //history.push('/home')  //remember to add router
+    }
+  };
+
+  const validation = () => {
+    let errors = {};
+    let formIsValid = true;
+    const emailRegex =
+      /((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/;
+
+    if (!email.match(emailRegex)) {
+      formIsValid = false;
+      errors.email = "Please use a valid email address";
+    }
+
+    if (!password.match(passwordRegex)) {
+      formIsValid = false;
+      errors.password =
+        "Your password must contain at least 1 lowercase, 1 uppercase and 1 numeric character";
+    }
+
+    setErrors(errors);
+    return formIsValid;
   };
 
   return (
@@ -27,6 +55,7 @@ function LoginForm() {
           onChange={handleChange}
           value={email}
         />
+        <span style={{ color: "red" }}>{errors?.email}</span>
       </fieldset>
       <fieldset>
         <label htmlFor="password">Password</label>
@@ -37,6 +66,7 @@ function LoginForm() {
           onChange={handleChange}
           value={password}
         />
+        <span style={{ color: "red" }}>{errors?.password}</span>
         <button type="button" onClick={() => setShowPassword(!showPassword)}>
           EYE
         </button>
