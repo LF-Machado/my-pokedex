@@ -7,6 +7,7 @@ import Pokemon from "./Pokemon";
 import { useLocation, useHistory } from "react-router-dom";
 import saveFavorites from "../utils/saveFavorites";
 import getFavorites from "../utils/getFavorites";
+import checkFavorites from "../utils/checkFavorites";
 
 function ScrollList() {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -23,14 +24,10 @@ function ScrollList() {
   let location = useLocation();
   let history = useHistory();
 
-  console.log(favoritesArray);
-
   useEffect(() => {
     const page =
       parseInt(new URLSearchParams(location.search).get("page")) || 1;
     setOffset((page - 1) * limit);
-
-    // Check which favorites are stored and set pokemon with favorites to true
   }, [limit, location.search]);
 
   useEffect(() => {
@@ -51,10 +48,10 @@ function ScrollList() {
               return image;
             })
           );
-
-          setAllPokemon(detailPokemon);
+          const checkedPokemon = checkFavorites(detailPokemon, favoritesArray);
+          setAllPokemon(checkedPokemon);
           setMaxPage(Math.ceil(response.data.count / limit));
-          console.log(detailPokemon);
+          // console.log(detailPokemon);
         } catch (error) {
           alert(error);
         }

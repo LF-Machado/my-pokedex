@@ -10,7 +10,7 @@ function Pokemon({ allPokemon, handleClickUnfavorite, handleClickFavorite }) {
             <img src={pokemon.sprites.front_default} />
             {pokemon?.favorite ? (
               <button id={pokemon.id} onClick={handleClickUnfavorite}>
-                *
+                favorite
               </button>
             ) : (
               <button id={pokemon.id} onClick={handleClickFavorite}>
