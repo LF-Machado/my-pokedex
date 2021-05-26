@@ -11,7 +11,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (logedIn) history.push("/home");
-  }, []);
+  }, [logedIn, history]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;

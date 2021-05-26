@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../Components/NavBar";
+import ScrollList from "../Components/ScrollList";
 import Logout from "../Components/Logout";
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
     <div>
       <div>Home</div>
       <Logout />
+      <ScrollList />
       <NavBar />
     </div>
   );

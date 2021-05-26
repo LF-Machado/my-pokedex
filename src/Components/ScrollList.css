@@ -1,0 +1,13 @@
+.scroll__container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.scroll {
+  /* background-color: grey;
+  overflow-y: scroll;
+  height: 100px;
+  width: 500px; */
+}
