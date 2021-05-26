@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const logedIn = localStorage.getItem("logedIn");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (logedIn) history.push("/home");
+  }, []);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -17,8 +24,8 @@ function LoginForm() {
     e.preventDefault();
 
     if (validation()) {
-      sessionStorage.setItem("logedIn", true);
-      //history.push('/home')  //remember to add router
+      localStorage.setItem("logedIn", true);
+      history.push("/home");
     }
   };
 
