@@ -27,6 +27,7 @@ function DetailView() {
       try {
         const details = await getDetails(url);
         const checkedPokemon = checkFavorites([details], favoritesArray);
+        console.log(checkedPokemon);
         setPokeDetails(...checkedPokemon);
       } catch (error) {
         alert(error);
@@ -34,7 +35,7 @@ function DetailView() {
     }
 
     fetchData();
-  }, [location.search]);
+  }, [location.search, favoritesArray]);
 
   useEffect(() => {
     saveFavorites(currUser, favoritesArray);

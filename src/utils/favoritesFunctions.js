@@ -1,10 +1,15 @@
-//Gets list of favorite pokemon for current user from the local storage
+//Gets list of favorite pokemon for current user from the local storage in ascending order
 export function getFavorites(user) {
   const allUsersFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  return allUsersFavorites
+  const favoritesArray = allUsersFavorites
     ? allUsersFavorites.filter(userFavorites => userFavorites.user === user)[0]
         ?.favorites
     : [];
+
+  if (!favoritesArray) return favoritesArray;
+  favoritesArray.sort((a, b) => a - b);
+
+  return favoritesArray;
 }
 
 //Checks if the pokemon rendering at the moment are found in the list of favorite pokemon

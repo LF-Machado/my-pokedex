@@ -68,7 +68,14 @@ function ScrollList() {
       }
       setLastArray(arr);
     }
-  }, [logedIn, limit, location.search]);
+  }, [
+    logedIn,
+    limit,
+    location.search,
+    favoritesArray,
+    maxPage,
+    pagesArray.length,
+  ]);
 
   useEffect(() => {
     saveFavorites(currUser, favoritesArray);
