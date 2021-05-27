@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
 import getDetails from "../utils/getDetails";
 import { useLocation, useHistory } from "react-router-dom";
+import FavoriteButton from "./FavoriteButton";
+import {
+  checkFavorites,
+  getFavorites,
+  saveFavorites,
+  makeUnfavorite,
+  makeFavorite,
+} from "../utils/favoritesFunctions";
 
 function DetailView() {
   const [pokeDetails, setPokeDetails] = useState([]);
+  const currUser = localStorage.getItem("user");
+  const [favoritesArray, setFavoritesArray] = useState(
+    getFavorites(currUser) || []
+  );
   let history = useHistory();
   let location = useLocation();
 
@@ -14,7 +26,8 @@ function DetailView() {
     async function fetchData() {
       try {
         const details = await getDetails(url);
-        setPokeDetails(details);
+        const checkedPokemon = checkFavorites([details], favoritesArray);
+        setPokeDetails(...checkedPokemon);
       } catch (error) {
         alert(error);
       }
@@ -22,6 +35,32 @@ function DetailView() {
 
     fetchData();
   }, [location.search]);
+
+  useEffect(() => {
+    saveFavorites(currUser, favoritesArray);
+  }, [currUser, favoritesArray]);
+
+  const handleClickUnfavorite = ({ target }) => {
+    const [newPokemon, newFavorites] = makeUnfavorite(
+      target,
+      [pokeDetails],
+      favoritesArray
+    );
+
+    setPokeDetails(...newPokemon);
+    setFavoritesArray([...newFavorites]);
+  };
+
+  const handleClickFavorite = ({ target }) => {
+    const [newPokemon, newFavorites] = makeFavorite(
+      target,
+      [pokeDetails],
+      favoritesArray
+    );
+
+    setPokeDetails(...newPokemon);
+    setFavoritesArray([...newFavorites]);
+  };
 
   const handleGoBack = () => {
     history.goBack();
@@ -54,7 +93,13 @@ function DetailView() {
                         </tbody>
                       </table>
                     </td>
-                    <td>FAVORITEBUTTON</td>
+                    <td>
+                      <FavoriteButton
+                        pokemon={pokeDetails}
+                        handleClickUnfavorite={handleClickUnfavorite}
+                        handleClickFavorite={handleClickFavorite}
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td>
