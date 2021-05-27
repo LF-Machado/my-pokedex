@@ -1,5 +1,6 @@
 import React from "react";
 import "./Pokemon.css";
+import FavoriteButton from "./FavoriteButton";
 
 function Pokemon({
   allPokemon,
@@ -20,15 +21,11 @@ function Pokemon({
               id={pokemon.id}
               onClick={goToDetail}
             />
-            {pokemon?.favorite ? (
-              <button id={pokemon.id} onClick={handleClickUnfavorite}>
-                favorite
-              </button>
-            ) : (
-              <button id={pokemon.id} onClick={handleClickFavorite}>
-                -
-              </button>
-            )}
+            <FavoriteButton
+              pokemon={pokemon}
+              handleClickUnfavorite={handleClickUnfavorite}
+              handleClickFavorite={handleClickFavorite}
+            />
           </div>
         );
       })}

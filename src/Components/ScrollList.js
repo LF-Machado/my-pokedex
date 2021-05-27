@@ -5,9 +5,13 @@ import getDetails from "../utils/getDetails";
 import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
 import { useLocation, useHistory } from "react-router-dom";
-import saveFavorites from "../utils/saveFavorites";
-import getFavorites from "../utils/getFavorites";
-import checkFavorites from "../utils/checkFavorites";
+import {
+  checkFavorites,
+  getFavorites,
+  saveFavorites,
+  makeUnfavorite,
+  makeFavorite,
+} from "../utils/favoritesFunctions";
 
 function ScrollList() {
   let location = useLocation();
@@ -95,26 +99,25 @@ function ScrollList() {
   };
 
   const handleClickUnfavorite = ({ target }) => {
-    const id = parseInt(target.id);
-    let i = 0;
-    for (i; i < allPokemon.length; i++) if (allPokemon[i].id === id) break;
+    const [newPokemon, newFavorites] = makeUnfavorite(
+      target,
+      allPokemon,
+      favoritesArray
+    );
 
-    allPokemon[i].favorite = false;
-    setAllPokemon([...allPokemon]);
-
-    favoritesArray.splice(favoritesArray.indexOf(id), 1);
-    setFavoritesArray([...favoritesArray]);
+    setAllPokemon([...newPokemon]);
+    setFavoritesArray([...newFavorites]);
   };
 
   const handleClickFavorite = ({ target }) => {
-    const id = parseInt(target.id);
-    let i = 0;
-    for (i; i < allPokemon.length; i++) if (allPokemon[i].id === id) break;
+    const [newPokemon, newFavorites] = makeFavorite(
+      target,
+      allPokemon,
+      favoritesArray
+    );
 
-    allPokemon[i].favorite = true;
-    setAllPokemon([...allPokemon]);
-
-    setFavoritesArray([...favoritesArray, id]);
+    setAllPokemon([...newPokemon]);
+    setFavoritesArray([...newFavorites]);
   };
 
   const goToDetail = ({ target }) => {

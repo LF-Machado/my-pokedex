@@ -14,7 +14,6 @@ function DetailView() {
     async function fetchData() {
       try {
         const details = await getDetails(url);
-        console.log(details);
         setPokeDetails(details);
       } catch (error) {
         alert(error);
