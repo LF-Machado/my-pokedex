@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function getImage(url) {
+async function getDetails(url) {
   try {
     const response = await axios.get(url);
 
@@ -10,4 +10,4 @@ async function getImage(url) {
   }
 }
 
-export default getImage;
+export default getDetails;

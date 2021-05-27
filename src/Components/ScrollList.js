@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ScrollList.css";
-import getImage from "../utils/getImage";
+import getDetails from "../utils/getDetails";
 import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
 import { useLocation, useHistory } from "react-router-dom";
@@ -10,9 +10,10 @@ import getFavorites from "../utils/getFavorites";
 import checkFavorites from "../utils/checkFavorites";
 
 function ScrollList() {
+  let location = useLocation();
+  let history = useHistory();
   const [allPokemon, setAllPokemon] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [limit] = useState(20);
+  const limit = 20;
   const [pagesArray, setPagesArr] = useState([1, 2, 3, 4, 5]);
   const [maxPage, setMaxPage] = useState(10);
   const [lastArray, setLastArray] = useState([]);
@@ -21,16 +22,13 @@ function ScrollList() {
     getFavorites(currUser) || []
   );
   const logedIn = localStorage.getItem("logedIn");
-  let location = useLocation();
-  let history = useHistory();
 
   useEffect(() => {
     const page =
       parseInt(new URLSearchParams(location.search).get("page")) || 1;
-    setOffset((page - 1) * limit);
-  }, [limit, location.search]);
+    const offset = (page - 1) * limit;
+    changePagesArray(page);
 
-  useEffect(() => {
     if (logedIn) {
       const fetchData = async () => {
         try {
@@ -44,14 +42,13 @@ function ScrollList() {
           });
           const detailPokemon = await Promise.all(
             allUrl.map(url => {
-              const image = getImage(url);
+              const image = getDetails(url);
               return image;
             })
           );
           const checkedPokemon = checkFavorites(detailPokemon, favoritesArray);
           setAllPokemon(checkedPokemon);
           setMaxPage(Math.ceil(response.data.count / limit));
-          // console.log(detailPokemon);
         } catch (error) {
           alert(error);
         }
@@ -67,26 +64,24 @@ function ScrollList() {
       }
       setLastArray(arr);
     }
-  }, [logedIn, offset, limit]);
+  }, [logedIn, limit, location.search]);
 
   useEffect(() => {
     saveFavorites(currUser, favoritesArray);
   }, [currUser, favoritesArray]);
 
+  const changePagesArray = page => {
+    if (page === 1) setPagesArr([1, 2, 3, 4, 5]);
+    else if (!lastArray.includes(page))
+      setPagesArr([page - 1, page, page + 1, page + 2, page + 3]);
+    else setPagesArr(lastArray);
+  };
+
   const handlePageClick = ({ target }) => {
     const clickedPage = parseInt(target.innerText);
     history.push(`?page=${clickedPage}`);
 
-    if (clickedPage === 1) setPagesArr([1, 2, 3, 4, 5]);
-    else if (!lastArray.includes(clickedPage))
-      setPagesArr([
-        clickedPage - 1,
-        clickedPage,
-        clickedPage + 1,
-        clickedPage + 2,
-        clickedPage + 3,
-      ]);
-    else setPagesArr(lastArray);
+    changePagesArray(clickedPage);
   };
 
   const goToFirst = () => {
@@ -122,6 +117,11 @@ function ScrollList() {
     setFavoritesArray([...favoritesArray, id]);
   };
 
+  const goToDetail = ({ target }) => {
+    const id = parseInt(target.id);
+    history.push(`/detail?id=${id}`);
+  };
+
   return (
     <div className="scroll__container">
       <Pagination
@@ -135,6 +135,7 @@ function ScrollList() {
         allPokemon={allPokemon}
         handleClickUnfavorite={handleClickUnfavorite}
         handleClickFavorite={handleClickFavorite}
+        goToDetail={goToDetail}
       />
       <Pagination
         pagesArray={pagesArray}
