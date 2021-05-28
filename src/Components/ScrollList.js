@@ -82,6 +82,10 @@ function ScrollList() {
     saveFavorites(currUser, favoritesArray);
   }, [currUser, favoritesArray]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.search]);
+
   const changePagesArray = page => {
     if (page === 1) setPagesArr([1, 2, 3, 4, 5]);
     else if (!lastArray.includes(page))
@@ -135,7 +139,7 @@ function ScrollList() {
 
   const scrollListStyle = {
     display: "flex",
-    "flex-direction": "column",
+    flexDirection: "column",
   };
 
   return (
