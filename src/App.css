@@ -2,6 +2,7 @@
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  min-height: 90vh;
   /* background-image: url("https://st2.depositphotos.com/3213441/12022/v/950/depositphotos_120226298-stock-illustration-pokemon-go-pokeball-seamless-texture.jpg"); */
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png");
   background-size: 300px;

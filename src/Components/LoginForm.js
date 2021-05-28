@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Card, Form, Table, Button } from "react-bootstrap";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -52,35 +53,66 @@ function LoginForm() {
     return formIsValid;
   };
 
+  const loginFormStyle = {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="text"
-          onChange={handleChange}
-          value={email}
-        />
-        <span style={{ color: "red" }}>{errors?.email}</span>
-      </fieldset>
-      <fieldset>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type={showPassword ? "text" : "password"}
-          onChange={handleChange}
-          value={password}
-        />
-        <span style={{ color: "red" }}>{errors?.password}</span>
-        <button type="button" onClick={() => setShowPassword(!showPassword)}>
-          EYE
-        </button>
-      </fieldset>
-      <button>Submit</button>
-    </form>
+    <div style={{ loginFormStyle }}>
+      <Card className="m-5 p-5">
+        <Form onSubmit={handleSubmit}>
+          <Table>
+            <tr>
+              <Form.Label htmlFor="email">Email</Form.Label>
+              <Form.Control
+                required
+                placeholder="Email"
+                id="email"
+                name="email"
+                type="text"
+                onChange={handleChange}
+                value={email}
+                isValid={!errors?.email}
+                isInvalid={errors?.email}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </tr>
+            <tr>
+              <td>
+                <Form.Label htmlFor="password">Password</Form.Label>
+                <Form.Control
+                  required
+                  placeholder="Password"
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={handleChange}
+                  value={password}
+                  isValid={!errors?.password}
+                  isInvalid={errors?.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              </td>
+              <td>
+                <Button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  EYE
+                </Button>
+              </td>
+            </tr>
+            <Button variant="success">Submit</Button>
+          </Table>
+        </Form>
+      </Card>
+    </div>
   );
 }
 

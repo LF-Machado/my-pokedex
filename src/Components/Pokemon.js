@@ -1,5 +1,4 @@
 import React from "react";
-import "./Pokemon.css";
 import FavoriteButton from "./FavoriteButton";
 import Card from "react-bootstrap/Card";
 
