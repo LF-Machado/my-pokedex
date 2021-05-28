@@ -8,7 +8,6 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
   const logedIn = localStorage.getItem("logedIn");
   const history = useHistory();
 
@@ -52,7 +51,6 @@ function LoginForm() {
     }
 
     setErrors(errors);
-    setIsValid(formIsValid);
     return formIsValid;
   };
 
@@ -96,9 +94,9 @@ function LoginForm() {
                 Password
               </Form.Label>
             </Row>
-            <Row className="mb-4 justify-content-md-between align-items-center ">
+            <Row className="mb-4 justify-content-md-between align-items-start ">
               <Col
-                className="d-flex ml-0 p-0"
+                className="d-flex ml-0 p-0 flex-column "
                 xs={12}
                 sm={12}
                 md={9}
@@ -115,7 +113,7 @@ function LoginForm() {
                   onChange={handleChange}
                   value={password}
                   isValid={!errors?.password}
-                  isInvalid={errors?.email}
+                  isInvalid={errors?.password}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.password}
