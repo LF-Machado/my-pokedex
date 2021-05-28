@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 function Logout() {
   const logedIn = localStorage.getItem("logedIn");
@@ -15,7 +16,15 @@ function Logout() {
     history.push("/");
   };
 
-  return <button onClick={logout}>Logout</button>;
+  return (
+    <Button
+      className="ml-5 mb-1 mt-1 align-self-end"
+      variant="secondary"
+      onClick={logout}
+    >
+      Logout
+    </Button>
+  );
 }
 
 export default Logout;

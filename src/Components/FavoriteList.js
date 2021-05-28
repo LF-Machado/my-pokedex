@@ -58,12 +58,19 @@ function FavoriteList() {
     history.push(`/detail?id=${id}`);
   };
 
+  const favoriteListStyle = {
+    display: "flex",
+    "flex-direction": "column",
+  };
+
   return (
-    <Pokemon
-      allPokemon={allPokemon}
-      handleClickUnfavorite={handleClickUnfavorite}
-      goToDetail={goToDetail}
-    />
+    <div style={favoriteListStyle}>
+      <Pokemon
+        allPokemon={allPokemon}
+        handleClickUnfavorite={handleClickUnfavorite}
+        goToDetail={goToDetail}
+      />
+    </div>
   );
 }
 

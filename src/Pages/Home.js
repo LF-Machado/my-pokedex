@@ -6,8 +6,6 @@ import Logout from "../Components/Logout";
 function Home() {
   return (
     <div>
-      <div>Home</div>
-      <Logout />
       <ScrollList />
       <NavBar />
     </div>

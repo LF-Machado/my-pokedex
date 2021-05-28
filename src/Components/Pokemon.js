@@ -11,21 +11,21 @@ function Pokemon({
 }) {
   return (
     <Card
-      className="ml-5 mr-5 p-3 w-75 align-self-center "
+      className="ml-5 mr-5 mb-5 mt-5 p-5 w-75 align-self-center "
       bg="dark"
       border="primary"
     >
       {allPokemon.map(pokemon => {
         return (
           <Card
-            className="d-flex align-self-center text-center w-50 mb-3 ml-4 mr-4"
+            className="d-flex align-self-center text-center w-50 mb-3 mt-2 ml-4 mr-4 p-2"
             border="primary"
             bg="secondary"
             text="light"
             key={pokemon.id}
           >
             <h4 onClick={goToDetail} id={pokemon.id}>
-              {pokemon.name}
+              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
             </h4>
             <FavoriteButton
               pokemon={pokemon}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ScrollList.css";
 import getDetails from "../utils/getDetails";
 import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
@@ -134,8 +133,13 @@ function ScrollList() {
     history.push(`/detail?id=${id}`);
   };
 
+  const scrollListStyle = {
+    display: "flex",
+    "flex-direction": "column",
+  };
+
   return (
-    <div className="scroll__container">
+    <div style={scrollListStyle}>
       <Pagination
         pagesArray={pagesArray}
         handlePageClick={handlePageClick}
@@ -144,19 +148,12 @@ function ScrollList() {
         maxPage={maxPage}
         currPage={currPage}
       />
+      <div style={{ margin: "0.5rem" }}> </div>
       <Pokemon
         allPokemon={allPokemon}
         handleClickUnfavorite={handleClickUnfavorite}
         handleClickFavorite={handleClickFavorite}
         goToDetail={goToDetail}
-      />
-      <Pagination
-        pagesArray={pagesArray}
-        handlePageClick={handlePageClick}
-        goToFirst={goToFirst}
-        goToLast={goToLast}
-        maxPage={maxPage}
-        currPage={currPage}
       />
     </div>
   );

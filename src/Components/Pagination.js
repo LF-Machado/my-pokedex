@@ -11,9 +11,8 @@ function PageButton({
 }) {
   return (
     <Card
-      className="ml-4 mr-4 p-3 align-content-center w-75 align-self-center"
-      bg="secondary"
-      border="primary"
+      className="m-auto p-3 align-content-center w-75 align-self-center fixed-top"
+      bg="danger"
     >
       <Pagination className="align-self-center m-auto">
         {pagesArray[0] === 1 ? false : <Pagination.First onClick={goToFirst} />}
