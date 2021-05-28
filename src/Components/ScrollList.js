@@ -158,13 +158,8 @@ function ScrollList() {
     history.push(`/detail?id=${id}`);
   };
 
-  const scrollListStyle = {
-    display: "flex",
-    flexDirection: "column",
-  };
-
   return (
-    <div style={scrollListStyle}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Pagination
         pagesArray={pagesArray}
         handlePageClick={handlePageClick}

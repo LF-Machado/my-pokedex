@@ -6,7 +6,7 @@ async function getDetails(url) {
 
     return response.data;
   } catch (error) {
-    alert.log(error);
+    alert(error);
   }
 }
 
