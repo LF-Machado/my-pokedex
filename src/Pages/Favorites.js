@@ -1,6 +1,5 @@
 import React from "react";
 import NavBar from "../Components/NavBar";
-import Logout from "../Components/Logout";
 import FavoriteList from "../Components/FavoriteList";
 import Card from "react-bootstrap/Card";
 
