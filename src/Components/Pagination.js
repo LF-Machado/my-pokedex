@@ -8,6 +8,8 @@ function PageButton({
   goToFirst,
   goToLast,
   currPage,
+  goToPrev,
+  goToNext,
 }) {
   return (
     <Card
@@ -16,6 +18,7 @@ function PageButton({
     >
       <Pagination className="align-self-center m-auto">
         {pagesArray[0] === 1 ? false : <Pagination.First onClick={goToFirst} />}
+        {currPage === 1 ? false : <Pagination.Prev onClick={goToPrev} />}
         {pagesArray.map(page => {
           if (page > maxPage) return false;
           return (
@@ -29,6 +32,7 @@ function PageButton({
           );
         })}
 
+        {currPage === maxPage ? false : <Pagination.Next onClick={goToNext} />}
         {pagesArray.includes(maxPage) ? (
           false
         ) : (

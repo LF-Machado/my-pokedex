@@ -87,8 +87,11 @@ function ScrollList() {
   }, [location.search]);
 
   const changePagesArray = page => {
+    const copyLastArray = [...lastArray];
+    copyLastArray.splice(0, 1);
+
     if (page === 1) setPagesArr([1, 2, 3, 4, 5]);
-    else if (!lastArray.includes(page))
+    else if (!copyLastArray.includes(page))
       setPagesArr([page - 1, page, page + 1, page + 2, page + 3]);
     else setPagesArr(lastArray);
   };
@@ -108,6 +111,24 @@ function ScrollList() {
   const goToLast = () => {
     setPagesArr(lastArray);
     history.push(`?page=${maxPage}`);
+  };
+
+  const goToPrev = () => {
+    if (pagesArray.includes(1)) {
+      history.push(`?page=${1}`);
+    } else {
+      setPagesArr(pagesArray.map(page => page - 1));
+      history.push(`?page=${currPage - 1}`);
+    }
+  };
+
+  const goToNext = () => {
+    if (pagesArray.includes(maxPage)) {
+      history.push(`?page=${currPage + 1}`);
+    } else {
+      setPagesArr(pagesArray.map(page => page + 1));
+      history.push(`?page=${currPage + 1}`);
+    }
   };
 
   const handleClickUnfavorite = ({ target }) => {
@@ -151,6 +172,8 @@ function ScrollList() {
         goToLast={goToLast}
         maxPage={maxPage}
         currPage={currPage}
+        goToPrev={goToPrev}
+        goToNext={goToNext}
       />
       <div style={{ margin: "0.5rem" }}> </div>
       <Pokemon
