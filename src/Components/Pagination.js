@@ -1,4 +1,5 @@
 import React from "react";
+import { Pagination, Card } from "react-bootstrap";
 
 function PageButton({
   pagesArray,
@@ -6,29 +7,36 @@ function PageButton({
   maxPage,
   goToFirst,
   goToLast,
+  currPage,
 }) {
   return (
-    <div>
-      {pagesArray[0] === 1 ? (
-        false
-      ) : (
-        <button onClick={goToFirst}>{"<<<"}</button>
-      )}
-      {pagesArray.map(page => {
-        if (page > maxPage) return false;
-        return (
-          <button key={page} onClick={handlePageClick}>
-            {page}
-          </button>
-        );
-      })}
+    <Card
+      className="ml-4 mr-4 p-3 align-content-center w-75 align-self-center"
+      bg="secondary"
+      border="primary"
+    >
+      <Pagination className="align-self-center m-auto">
+        {pagesArray[0] === 1 ? false : <Pagination.First onClick={goToFirst} />}
+        {pagesArray.map(page => {
+          if (page > maxPage) return false;
+          return (
+            <Pagination.Item
+              key={page}
+              onClick={handlePageClick}
+              active={page === currPage}
+            >
+              {page}
+            </Pagination.Item>
+          );
+        })}
 
-      {pagesArray.includes(maxPage) ? (
-        false
-      ) : (
-        <button onClick={goToLast}>{">>>"}</button>
-      )}
-    </div>
+        {pagesArray.includes(maxPage) ? (
+          false
+        ) : (
+          <Pagination.Last onClick={goToLast} />
+        )}
+      </Pagination>
+    </Card>
   );
 }
 

@@ -22,6 +22,7 @@ function ScrollList() {
   const [maxPage, setMaxPage] = useState(10);
   const [lastArray, setLastArray] = useState([]);
   const currUser = localStorage.getItem("user");
+  const [currPage, setCurrPage] = useState(1);
   const [favoritesArray, setFavoritesArray] = useState(
     getFavorites(currUser) || []
   );
@@ -32,6 +33,7 @@ function ScrollList() {
       parseInt(new URLSearchParams(location.search).get("page")) || 1;
     const offset = (page - 1) * limit;
     changePagesArray(page);
+    setCurrPage(page);
 
     if (logedIn) {
       const fetchData = async () => {
@@ -140,6 +142,7 @@ function ScrollList() {
         goToFirst={goToFirst}
         goToLast={goToLast}
         maxPage={maxPage}
+        currPage={currPage}
       />
       <Pokemon
         allPokemon={allPokemon}
@@ -153,6 +156,7 @@ function ScrollList() {
         goToFirst={goToFirst}
         goToLast={goToLast}
         maxPage={maxPage}
+        currPage={currPage}
       />
     </div>
   );

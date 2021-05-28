@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 function favoriteButton({
   pokemon,
@@ -8,13 +9,24 @@ function favoriteButton({
   return (
     <div>
       {pokemon?.favorite ? (
-        <button id={pokemon.id} onClick={handleClickUnfavorite}>
-          favorite
-        </button>
+        <Button
+          className="m-2"
+          variant="warning"
+          border="dark"
+          id={pokemon.id}
+          onClick={handleClickUnfavorite}
+        >
+          Favorite
+        </Button>
       ) : (
-        <button id={pokemon.id} onClick={handleClickFavorite}>
-          -
-        </button>
+        <Button
+          className="m-2"
+          variant="outline-light"
+          id={pokemon.id}
+          onClick={handleClickFavorite}
+        >
+          Add
+        </Button>
       )}
     </div>
   );

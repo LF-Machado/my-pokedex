@@ -13,15 +13,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/detail" component={Detail} />
-        <Route exact path="/favorites" component={Favorites} />
-        <Redirect from="*" to="/" />
-      </Switch>
-    </Router>
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/detail" component={Detail} />
+          <Route exact path="/favorites" component={Favorites} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

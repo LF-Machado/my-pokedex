@@ -1,6 +1,7 @@
 import React from "react";
 import "./Pokemon.css";
 import FavoriteButton from "./FavoriteButton";
+import Card from "react-bootstrap/Card";
 
 function Pokemon({
   allPokemon,
@@ -9,29 +10,39 @@ function Pokemon({
   goToDetail,
 }) {
   return (
-    <div>
+    <Card
+      className="ml-5 mr-5 p-3 w-75 align-self-center "
+      bg="dark"
+      border="primary"
+    >
       {allPokemon.map(pokemon => {
         return (
-          <div key={pokemon.id}>
-            <label onClick={goToDetail} id={pokemon.id}>
+          <Card
+            className="d-flex align-self-center text-center w-50 mb-3 ml-4 mr-4"
+            border="primary"
+            bg="secondary"
+            text="light"
+            key={pokemon.id}
+          >
+            <h4 onClick={goToDetail} id={pokemon.id}>
               {pokemon.name}
-            </label>
-            <img
-              className="pokemon__image"
-              src={pokemon.sprites.other["official-artwork"].front_default}
-              alt=""
-              id={pokemon.id}
-              onClick={goToDetail}
-            />
+            </h4>
             <FavoriteButton
               pokemon={pokemon}
               handleClickUnfavorite={handleClickUnfavorite}
               handleClickFavorite={handleClickFavorite}
             />
-          </div>
+            <Card.Img
+              className="align-self-center w-50 m-2"
+              src={pokemon.sprites.other["official-artwork"].front_default}
+              alt="404 image not found"
+              id={pokemon.id}
+              onClick={goToDetail}
+            />
+          </Card>
         );
       })}
-    </div>
+    </Card>
   );
 }
 

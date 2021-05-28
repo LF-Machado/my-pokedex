@@ -1,11 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function NavBar() {
   return (
     <div>
-      <Link to="/home">Home</Link>
-      <Link to="/favorites">Favorites</Link>
+      <Navbar bg="dark" variant="dark">
+        <Nav className="m-auto" variant="pills" fill>
+          <LinkContainer to="/home">
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/favorites">
+            <Nav.Link>Favorites</Nav.Link>
+          </LinkContainer>
+        </Nav>
+      </Navbar>
     </div>
   );
 }
