@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Logout from "./Logout";
+import Typeahead from "./Typeahead";
 
 function NavBar() {
   return (
@@ -14,11 +15,15 @@ function NavBar() {
       >
         <div
           style={{
+            display: "flex",
+            alignItems: "center",
             marginRight: "50px",
             alignSelf: "flex-start",
             width: "96px",
           }}
-        ></div>
+        >
+          <Typeahead />
+        </div>
         <Nav className="m-auto align-self-center" variant="tabs" fill>
           <LinkContainer to="/home">
             <Nav.Link>Home</Nav.Link>
