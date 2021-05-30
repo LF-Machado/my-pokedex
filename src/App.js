@@ -16,21 +16,21 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route
+        {/* <Route
           render={({ location }) => (
             <TransitionGroup>
-              <CSSTransition key={location.key} timeout={300} classNames="fade">
-                <Switch location={location}>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/home" component={Home} />
-                  <Route exact path="/detail" component={Detail} />
-                  <Route exact path="/favorites" component={Favorites} />
-                  <Redirect from="*" to="/" />
-                </Switch>
-              </CSSTransition>
+              <CSSTransition key={location.key} timeout={300} classNames="fade"> */}
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/detail" component={Detail} />
+          <Route exact path="/favorites" component={Favorites} />
+          <Redirect from="*" to="/" />
+        </Switch>
+        {/* </CSSTransition>
             </TransitionGroup>
           )}
-        />
+        /> */}
       </Router>
     </div>
   );

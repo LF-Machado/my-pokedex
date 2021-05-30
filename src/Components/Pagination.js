@@ -1,5 +1,6 @@
 import React from "react";
-import { Pagination, Card } from "react-bootstrap";
+import { Pagination, Card, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function PageButton({
   pagesArray,
@@ -13,10 +14,20 @@ function PageButton({
 }) {
   return (
     <Card
-      className="m-auto p-3 align-content-center w-75 align-self-center fixed-top"
+      className="m-auto p-3 align-content-center flex-row w-75 align-self-center fixed-top"
       bg="danger"
     >
-      <Pagination className="align-self-center m-auto">
+      <div style={{ display: "flex", flex: "1 1 0px" }}>
+        <LinkContainer to="/home">
+          <Navbar.Brand className="align-self-start justify-content-start ml-3">
+            My Pokédex
+          </Navbar.Brand>
+        </LinkContainer>
+      </div>
+      <Pagination
+        className="align-self-center m-auto justify-content-center"
+        style={{ flex: "1 1 0px" }}
+      >
         {pagesArray[0] === 1 ? false : <Pagination.First onClick={goToFirst} />}
         {currPage === 1 ? false : <Pagination.Prev onClick={goToPrev} />}
         {pagesArray.map(page => {
@@ -39,6 +50,7 @@ function PageButton({
           <Pagination.Last onClick={goToLast} />
         )}
       </Pagination>
+      <div style={{ flex: "1 1 0px" }} />
     </Card>
   );
 }
