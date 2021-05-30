@@ -176,6 +176,7 @@ function ScrollList() {
         handleClickUnfavorite={handleClickUnfavorite}
         handleClickFavorite={handleClickFavorite}
         goToDetail={goToDetail}
+        scrollList={true}
       />
     </div>
   );

@@ -57,8 +57,6 @@ function LoginForm() {
   return (
     <div
       style={{
-        // position: relative,
-        // text-align: center,
         marginLeft: "auto",
         marginRight: "auto",
         minHeight: "100vh",

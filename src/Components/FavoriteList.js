@@ -87,6 +87,7 @@ function FavoriteList() {
         allPokemon={allPokemon}
         handleClickUnfavorite={handleClickUnfavorite}
         goToDetail={goToDetail}
+        scrollList={false}
       />
     </div>
   );
