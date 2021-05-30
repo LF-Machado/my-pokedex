@@ -10,16 +10,11 @@ import {
   Redirect,
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Route
-          render={({ location }) => (
-            <TransitionGroup>
-              <CSSTransition key={location.key} timeout={300} classNames="fade"> */}
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/home" component={Home} />
@@ -27,10 +22,6 @@ function App() {
           <Route exact path="/favorites" component={Favorites} />
           <Redirect from="*" to="/" />
         </Switch>
-        {/* </CSSTransition>
-            </TransitionGroup>
-          )}
-        /> */}
       </Router>
     </div>
   );

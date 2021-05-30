@@ -64,7 +64,7 @@ function FavoriteList() {
 
   const favoriteListStyle = {
     display: "flex",
-    "flex-direction": "column",
+    flexDirection: "column",
   };
 
   return (

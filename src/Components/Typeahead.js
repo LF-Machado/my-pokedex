@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import getDetails from "../utils/getDetails";
-import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
 import { Search } from "@material-ui/icons";
 
 function Typeahead() {
@@ -54,7 +54,7 @@ function Typeahead() {
     };
 
     fetchData();
-  }, [searchValue]);
+  }, [searchValue, allPokemon]);
 
   const handleChange = ({ target }) => {
     const { value } = target;
