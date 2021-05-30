@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import getDetails from "../utils/getDetails";
+import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Search } from "@material-ui/icons";
 
 function Typeahead() {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -74,9 +76,10 @@ function Typeahead() {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", display: "flex" }}>
       {searchValue ? (
-        <div
+        <Card
+          className="mb-2 pt-2 pr-3 pb-1 pl-3"
           style={{
             position: "absolute",
             zIndex: "9",
@@ -85,6 +88,8 @@ function Typeahead() {
             backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
+            width: "15vw",
+            textAlign: "left",
           }}
         >
           {foundPokemon?.map(pokemon => (
@@ -92,26 +97,29 @@ function Typeahead() {
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
             </h6>
           ))}
-        </div>
+        </Card>
       ) : (
         false
       )}
-      <form
+      <Form
         style={{ display: "flex", flexDirection: "row" }}
         onSubmit={handleSubmit}
       >
-        <input
+        <Form.Control
+          className="mt-1"
           id="search"
           name="search"
           type="text"
           autoComplete="off"
           placeholder="Search..."
-          style={{ marginTop: "12px" }}
+          style={{ width: "15vw" }}
           onChange={handleChange}
           value={searchValue}
         />
-        <button>O</button>
-      </form>
+        <Button className="mt-1 ml-2" type="submit">
+          <Search />
+        </Button>
+      </Form>
     </div>
   );
 }

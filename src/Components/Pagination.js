@@ -1,6 +1,7 @@
 import React from "react";
 import { Pagination, Card, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import "./Pagination.css";
 
 function PageButton({
   pagesArray,
@@ -19,7 +20,7 @@ function PageButton({
     >
       <div style={{ display: "flex", flex: "1 1 0px" }}>
         <LinkContainer to="/home">
-          <Navbar.Brand className="align-self-start justify-content-start ml-3">
+          <Navbar.Brand className="align-self-start justify-content-start ml-3 link">
             My Pokédex
           </Navbar.Brand>
         </LinkContainer>

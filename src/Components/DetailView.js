@@ -178,7 +178,7 @@ function DetailView() {
                         <img
                           src={pokeDetails?.sprites?.front_default}
                           alt="Default sprite"
-                          style={{ width: "50%" }}
+                          style={{ width: "100%", marginTop: "2rem" }}
                         />
                         <br />
                         <small>Default</small>
@@ -187,7 +187,7 @@ function DetailView() {
                         <img
                           src={pokeDetails?.sprites?.front_shiny}
                           alt="Shiny sprite"
-                          style={{ width: "50%" }}
+                          style={{ width: "100%", marginTop: "2rem" }}
                         />
                         <br />
                         <small>Shiny</small>

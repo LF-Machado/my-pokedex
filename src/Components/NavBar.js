@@ -8,7 +8,7 @@ function NavBar() {
   return (
     <div>
       <Navbar
-        className="m-auto align-self-center justify-content-between w-75 "
+        className="m-auto align-self-center justify-content-between w-75 align-items-center "
         fixed="bottom"
         bg="danger"
         variant="light"
