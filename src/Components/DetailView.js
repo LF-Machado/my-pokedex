@@ -110,15 +110,25 @@ function DetailView() {
         bg="dark"
         text="light"
       >
-        <Card.Header className="d-flex align-items-center pl-5 pr-5 pt-3">
-          <Col className=" ">
-            <h4>
-              {pokeDetails?.name?.charAt(0).toUpperCase() +
-                pokeDetails?.name?.slice(1)}
-            </h4>
-            <h5>{`Id# ${pokeDetails?.id}`}</h5>
+        <Row>
+          <Col className="d-flex align-items-center ml-4">
+            <Button className="m-2" variant="danger" onClick={handleGoBack}>
+              Go Back
+            </Button>
           </Col>
-        </Card.Header>
+          <Col>
+            <Card.Header className="d-flex align-items-center pl-5 pr-5 pt-3">
+              <Col className=" ">
+                <h4>
+                  {pokeDetails?.name?.charAt(0).toUpperCase() +
+                    pokeDetails?.name?.slice(1)}
+                </h4>
+                <h5>{`Id# ${pokeDetails?.id}`}</h5>
+              </Col>
+            </Card.Header>
+          </Col>
+          <Col className="mr-4"></Col>
+        </Row>
         <Card
           className="d-flex align-self-center text-center w-100 pt-0 pl-2 pb-0 pr-2"
           border="primary"
@@ -184,14 +194,6 @@ function DetailView() {
               </Row>
             </Card>
           </Card>
-          <Button
-            variant="danger"
-            onClick={handleGoBack}
-            className="m-2"
-            size="sm"
-          >
-            Go Back
-          </Button>
         </Card>
       </Card>
     </Container>
