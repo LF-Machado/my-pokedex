@@ -11,6 +11,7 @@ function Pokemon({
   return (
     <Card
       className="ml-5 mr-5 mb-5 mt-5 p-5 w-75 align-self-center "
+      style={{ minHeight: "100vh" }}
       bg="dark"
       border="primary"
     >
