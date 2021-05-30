@@ -45,7 +45,6 @@ function Typeahead() {
           })
         );
 
-        console.log(detailPokemon);
         setFoundPokemon(detailPokemon);
       } catch (error) {
         alert(error);
@@ -63,6 +62,15 @@ function Typeahead() {
   const goToDetail = ({ target }) => {
     const id = parseInt(target.id);
     history.push(`/detail?id=${id}`);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (foundPokemon[0]) {
+      const obj = { target: { id: foundPokemon[0].id } };
+      goToDetail(obj);
+    }
   };
 
   return (
@@ -88,16 +96,22 @@ function Typeahead() {
       ) : (
         false
       )}
-      <input
-        id="search"
-        name="search"
-        type="text"
-        autoComplete="off"
-        placeholder="Search..."
-        style={{ marginTop: "12px" }}
-        onChange={handleChange}
-        value={searchValue}
-      />
+      <form
+        style={{ display: "flex", flexDirection: "row" }}
+        onSubmit={handleSubmit}
+      >
+        <input
+          id="search"
+          name="search"
+          type="text"
+          autoComplete="off"
+          placeholder="Search..."
+          style={{ marginTop: "12px" }}
+          onChange={handleChange}
+          value={searchValue}
+        />
+        <button>O</button>
+      </form>
     </div>
   );
 }
