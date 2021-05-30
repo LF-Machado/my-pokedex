@@ -103,7 +103,16 @@ function DetailView() {
   };
 
   return (
-    <Container className="d-flex justify-content-center" fluid>
+    <Container
+      className="d-flex justify-content-center"
+      fluid
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
       <Card
         className="d-flex align-self-center text-center w-75 p-0 m-3"
         border="primary"
@@ -130,70 +139,89 @@ function DetailView() {
           <Col className="mr-4"></Col>
         </Row>
         <Card
-          className="d-flex align-self-center text-center w-100 pt-0 pl-2 pb-0 pr-2"
+          className="d-flex align-self-center w-100 p-3"
           border="primary"
           bg="secondary"
           text="light"
         >
-          <Row className="justify-content-center">
-            <FavoriteButton
-              pokemon={pokeDetails}
-              handleClickUnfavorite={handleClickUnfavorite}
-              handleClickFavorite={handleClickFavorite}
-            />
-          </Row>
-          <Row className="justify-content-center">
-            <img
-              src={
-                pokeDetails?.sprites?.other["official-artwork"]?.front_default
-              }
-              alt="Official Artwork"
-              style={{ width: "60%" }}
-            />
-          </Row>
-          <Card bg="primary" border="primary" className="pt-0  m-2">
-            <Card.Header>Sprites</Card.Header>
-            <Card bg="dark" border="primary" className="pt-0 pl-5 pb-5 pr-5 ">
+          <Row>
+            <Col>
+              <Row className="justify-content-center">
+                <FavoriteButton
+                  pokemon={pokeDetails}
+                  handleClickUnfavorite={handleClickUnfavorite}
+                  handleClickFavorite={handleClickFavorite}
+                />
+              </Row>
+              <Row className="justify-content-center">
+                <img
+                  src={
+                    pokeDetails?.sprites?.other["official-artwork"]
+                      ?.front_default
+                  }
+                  alt="Official Artwork"
+                  style={{ width: "80%" }}
+                />
+              </Row>
+            </Col>
+            <Col className="d-flex flex-column align-items-center justify-content-center align-items-stretch ">
               <Row>
-                <Col>
-                  <img
-                    src={pokeDetails?.sprites?.front_default}
-                    alt="Default sprite"
-                    style={{ width: "50%" }}
-                  />
-                  <br />
-                  <small>Default</small>
-                </Col>
-                <Col>
-                  <img
-                    src={pokeDetails?.sprites?.front_shiny}
-                    alt="Shiny sprite"
-                    style={{ width: "50%" }}
-                  />
-                  <br />
-                  <small>Shiny</small>
-                </Col>
+                <Card bg="primary" border="primary" className="ml-5 mb-3 w-75">
+                  <Card.Header>Sprites</Card.Header>
+                  <Card
+                    bg="dark"
+                    border="primary"
+                    className="pt-0 pl-5 pb-5 pr-5 "
+                  >
+                    <Row>
+                      <Col>
+                        <img
+                          src={pokeDetails?.sprites?.front_default}
+                          alt="Default sprite"
+                          style={{ width: "50%" }}
+                        />
+                        <br />
+                        <small>Default</small>
+                      </Col>
+                      <Col>
+                        <img
+                          src={pokeDetails?.sprites?.front_shiny}
+                          alt="Shiny sprite"
+                          style={{ width: "50%" }}
+                        />
+                        <br />
+                        <small>Shiny</small>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Card>
               </Row>
-            </Card>
-          </Card>
-          <Card bg="primary" border="primary" className="pt-0  m-2">
-            <Card.Header>Types</Card.Header>
-            <Card bg="dark" border="primary" className="pt-0 pl-5 pb-0 pr-5 ">
-              <Row className="m-3 justify-content-center">
-                {pokeDetails?.types?.map((e, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className="m-2"
-                      style={defineStyle(e.type.name)}
-                    >
-                      {e.type.name}
-                    </div>
-                  );
-                })}
+              <Row>
+                <Card bg="primary" border="primary" className="ml-5 mt-3 w-75">
+                  <Card.Header>Types</Card.Header>
+                  <Card
+                    bg="dark"
+                    border="primary"
+                    className="pt-0 pl-5 pb-0 pr-5 "
+                  >
+                    <Row className="m-3 justify-content-center">
+                      {pokeDetails?.types?.map((e, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className="m-2"
+                            style={defineStyle(e.type.name)}
+                          >
+                            {e.type.name}
+                          </div>
+                        );
+                      })}
+                    </Row>
+                  </Card>
+                </Card>
               </Row>
-            </Card>
-          </Card>
+            </Col>
+          </Row>
         </Card>
       </Card>
     </Container>
