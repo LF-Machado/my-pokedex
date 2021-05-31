@@ -27,7 +27,7 @@ Alternatively you can visit [this link](https://my-pokedex-iota.vercel.app/) wit
 
 
 
-### 3. **Detail page**: Opens up a new page with more information by clicking any pokemon's image or name.
+### 3. **Detail page**: Opens a new page with more information by clicking any pokemon's image or name.
 
 ![pokedex3](https://user-images.githubusercontent.com/66527610/120132598-3abf5080-c190-11eb-9d28-ca427d8fc5f7.gif)
 
