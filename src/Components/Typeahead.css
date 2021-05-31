@@ -1,0 +1,7 @@
+.searchbox:hover {
+  background-color: #92aeca;
+}
+
+.searchbox__pokemon {
+  margin: 0.5rem 1rem 0.5rem 1rem;
+}

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import getDetails from "../utils/getDetails";
 import { Card, Form, Button } from "react-bootstrap";
 import { Search } from "@material-ui/icons";
+import "./Typeahead.css";
 
 function Typeahead() {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -79,7 +80,7 @@ function Typeahead() {
     <div style={{ position: "relative", display: "flex" }}>
       {searchValue ? (
         <Card
-          className="mb-2 pt-2 pr-3 pb-1 pl-3"
+          className="mb-2 pt-3 pb-3"
           style={{
             position: "absolute",
             zIndex: "9",
@@ -93,9 +94,16 @@ function Typeahead() {
           }}
         >
           {foundPokemon?.map(pokemon => (
-            <h6 id={pokemon.id} key={pokemon.id} onClick={goToDetail}>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </h6>
+            <div className="searchbox">
+              <h6
+                id={pokemon.id}
+                key={pokemon.id}
+                onClick={goToDetail}
+                className="searchbox__pokemon"
+              >
+                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+              </h6>
+            </div>
           ))}
         </Card>
       ) : (
